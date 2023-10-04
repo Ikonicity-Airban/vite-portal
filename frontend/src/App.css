@@ -1,0 +1,32 @@
+.logo {
+  text-shadow: 0px 0px 20px #5f0, 0px 0px 30px #5f59, 0px 0px 70px #5f55;
+}
+
+body > img {
+  object-fit: contain;
+  height: 100%;
+  display: none;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
