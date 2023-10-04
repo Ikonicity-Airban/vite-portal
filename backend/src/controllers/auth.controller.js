@@ -14,8 +14,6 @@ const {
   UnauthenticatedError,
   NotFoundError,
 } = require("../error");
-const Department = require("../models/department.model");
-
 ///////////////////////////////////////
 //?log in
 async function Login(req, res) {
@@ -58,9 +56,6 @@ async function CreateAccount(req, res) {
 
   //creates the user
   const user = new User({ email, password });
-  const department = await Department.findOne({ name: "Computer Science" });
-  if (!department) throw new NotFoundError("No department found");
-  user.department = department._id;
 
   //create the kind of user expected
   let createdUser;
@@ -73,7 +68,7 @@ async function CreateAccount(req, res) {
     createdUser = await Instructor.create({ userId: user._id, ...req.body });
   }
   user.save();
-  createdUser.populate("userId", "email role department");
+  createdUser.populate("userId", "email role ");
   //Token services
 
   //successful response
