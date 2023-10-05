@@ -265,9 +265,9 @@ export const InstructorLayout = () => {
               <Avatar
                 rounded
                 bordered
-                img={instructor.photoURL}
+                img={instructor?.photoURL}
                 placeholderInitials={instructor.userId?.email
-                  .slice(0, 2)
+                  ?.slice(0, 2)
                   .toUpperCase()}
                 status="online"
               />
