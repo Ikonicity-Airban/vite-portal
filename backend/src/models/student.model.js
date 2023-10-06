@@ -12,10 +12,11 @@ const StudentSchema = new Schema(
     photoURL: String,
     firstName: String,
     lastName: String,
-    reg_no: {
+    mat_no: {
       type: String,
       unique: true,
-      default: () => "NAF-".concat(randomUUID().split("-")[1]),
+      default: () =>
+        "Nacest/com/hnd21/".concat(randomUUID().split("-")[1].slice(0, 3)),
     },
     level: { type: Number, default: 100 },
 

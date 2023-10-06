@@ -19,7 +19,7 @@ export type IStudent = {
   lastName: string;
   coursesOffered?: ICourse[];
   level: number | 100 | 200 | 300 | 400;
-  reg_no?: string;
+  mat_no?: string;
   photoURL?: string;
   sex?: "male" | "female";
   mobile_phone?: string;

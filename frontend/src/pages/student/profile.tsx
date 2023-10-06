@@ -72,12 +72,12 @@ function StudentProfilePage() {
               />
             </div>
             <div className="space-y-3">
-              <Label value="Registration Number" htmlFor="reg_no" />
+              <Label value="Registration Number" htmlFor="mat_no" />
               <TextInput
                 required
                 disabled
-                defaultValue={student.reg_no}
-                id="reg_no"
+                defaultValue={student.mat_no}
+                id="mat_no"
               />
             </div>
 

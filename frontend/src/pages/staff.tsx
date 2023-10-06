@@ -25,9 +25,9 @@ function StaffPage() {
     <div className="mx-auto max-w-screen-desktop w-full my-10">
       <BreadcrumbComponents />
       <Section title="Staff Collection" subtitle="Our Amazing Staff">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
           {data?.count ? (
-            data.instructors.map((ins, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {data.instructors.map((ins, index) => (
               <Card
                 key={index}
                 imgSrc={ins.photoURL || ""}
@@ -47,10 +47,10 @@ function StaffPage() {
                 </p>
               </Card>
             ))
+            </div>
           ) : (
             <Card>No Staff available</Card>
           )}
-        </div>
       </Section>
     </div>
   );

@@ -120,6 +120,40 @@ export function StudentsPage() {
 
   const columns: TypeColumns = [
     // { name: "_id", header: "ID" },
+    /* 
+  coursesOffered?: ICourse[];
+  level: number | 100 | 200 | 300 | 400;
+  mat_no?: string;
+  photoURL?: string;
+  sex?: "male" | "female";
+  mobile_phone?: string;
+  contact_address?: string;
+  year_of_graduation?: string; */
+    {
+      header: "FirstName",
+      name: "firstName",
+      defaultFlex: 1,
+    },
+    {
+      header: "LastName",
+      name: "lastName",
+      defaultFlex: 1,
+    },
+    {
+      header: "Course",
+      name: "coursesOffered",
+      defaultFlex: 1,
+    },
+    {
+      header: "Level",
+      name: "level",
+      defaultFlex: 1,
+    },
+    {
+      header: "Mat No",
+      name: "mat_no",
+      defaultFlex: 1,
+    },
     {
       name: "actions",
       header: "actions",
@@ -150,7 +184,7 @@ export function StudentsPage() {
     >
       <div className="space-y-3">
         <Label value="First Name" htmlFor="firstName" />
-        <TextInput required {...register("firstName")} id="firstName"/>
+        <TextInput required {...register("firstName")} id="firstName" />
       </div>
       <div className="space-y-3">
         <Label value="Last Name" htmlFor="lastName" />
@@ -161,8 +195,8 @@ export function StudentsPage() {
         <TextInput required disabled id="email" />
       </div>
       <div className="space-y-3">
-        <Label value="Registration Number" htmlFor="reg_no" />
-        <TextInput required disabled id="reg_no" />
+        <Label value="Registration Number" htmlFor="mat_no" />
+        <TextInput required disabled id="mat_no" />
       </div>
 
       <div className="space-y-3">
