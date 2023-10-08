@@ -27,13 +27,6 @@ const FacultySection: React.FC = () => {
   return (
     <Section subtitle="Our Department Colossuses">
       <div className="container mx-auto px-4">
-        <p className="my-6">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae
-          nisi tempora neque, impedit, cum eum quia quos provident, animi magnam
-          dolore. Nulla omnis sit provident doloribus qui maiores, possimus
-          quibusdam!
-        </p>
-        <h2 className="text-2xl font-bold mb-4">Department Members</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {facultyMembers.map((faculty, index) => (
             <Card
