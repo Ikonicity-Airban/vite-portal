@@ -91,7 +91,7 @@ function InstructorProfilePage() {
               />
             </div>
             <div className="space-y-3">
-              <Label value="Course" htmlFor="reg_no" />
+              <Label value="Course" htmlFor="mat_no" />
               <TextInput value={instructor.courseTeaching?.code} disabled />
             </div>
 
