@@ -9,6 +9,7 @@ import {
 } from "flowbite-react";
 import {
   FaBook,
+  FaClock,
   FaDownload,
   FaGraduationCap,
   FaPen,
@@ -232,6 +233,20 @@ function InstructorAssignmentPage() {
             id="ass_title"
             // placeholder={label}
             {...register("title")}
+          />
+        </div>
+        <div className="relative w-full ">
+          <div className="mb-2 block ">
+            <Label htmlFor="ass_date">Deadline Date</Label>
+          </div>
+          <span className="absolute z-10 right-4 bottom-[20%] text-gray-500">
+            <FaClock></FaClock>
+          </span>
+          <TextInput
+            type="date"
+            required
+            id="ass_date"
+            {...register("endDate")}
           />
         </div>
         <div className="relative w-full ">
