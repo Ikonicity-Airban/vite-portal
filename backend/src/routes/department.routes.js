@@ -1,5 +1,4 @@
 const {
-  CreateDepartment,
   DeleteDepartmentInfo,
   UpdateDepartmentInfo,
   GetStudentInDepartment,
@@ -13,7 +12,6 @@ const router = require("express").Router();
 router
   .route("/")
   .get(authorizeRoles("admin"), GetDepartmentInfo)
-  .post(authorizeRoles("admin"), CreateDepartment)
   .patch(authorizeRoles("admin"), UpdateDepartmentInfo)
   .delete(authorizeRoles("admin"), DeleteDepartmentInfo);
 

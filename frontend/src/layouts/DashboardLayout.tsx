@@ -9,6 +9,7 @@ import {
   FaPagelines,
   FaRegUser,
   FaSignOutAlt,
+  FaUpload,
   FaUser,
   FaUserEdit,
   FaUserGraduate,
@@ -27,11 +28,12 @@ import useLocalStorage from "../api/hooks/useLocalStorage";
 const studentSideLinks = [
   { name: "Dashboard", link: "", icon: <FaDiceFour /> },
   { name: "Courses", link: "my-courses", icon: <FaBookOpen /> },
-  { name: "Assignment", link: "assignment", icon: <FaBoxOpen /> },
+  { name: "Assignments", link: "assignment", icon: <FaBoxOpen /> },
+  // { name: "Submission", link: "submission", icon: <FaUpload /> },
 ];
 const instructorSideLinks = [
   { name: "Dashboard", link: "", icon: <FaDiceFour /> },
-  { name: "Assignment", link: "assignment", icon: <FaBoxOpen /> },
+  { name: "Assignments", link: "assignment", icon: <FaBoxOpen /> },
   { name: "Events", link: "events", icon: <FaNewspaper /> },
   { name: "Profile", link: "my-profile", icon: <FaUserEdit /> },
 ];
@@ -41,7 +43,7 @@ const AdminSideLinks = [
   { name: "News & Events", link: "events", icon: <FaNewspaper /> },
   { name: "Courses", link: "courses", icon: <FaPagelines /> },
   { name: "Students", link: "students", icon: <FaUserGraduate /> },
-  { name: "Instructor", link: "instructors", icon: <FaRegUser /> },
+  { name: "Instructors", link: "instructors", icon: <FaRegUser /> },
 ];
 
 export const StudentLayout = () => {
@@ -115,37 +117,37 @@ export const StudentLayout = () => {
                   rounded
                   bordered
                   img={student.photoURL}
-                  placeholderInitials={
-                    student.userId
-                      ? student.userId?.email.slice(0, 2).toUpperCase()
-                      : ""
-                  }
+                  placeholderInitials={student.userId?.email
+                    .charAt(0)
+                    .toUpperCase()}
                   status="online"
                 />
               }
             >
               <Link to="my-profile">
                 <Dropdown.Header>
-                  <span className="logo-clipped">
+                  <h4 className="logo-clipped my-2">
                     {student.firstName} {student.lastName}
-                  </span>
+                  </h4>
                   <div className="">{student.userId.email}</div>
                 </Dropdown.Header>
-                <Dropdown.Item>
+                <Dropdown.Item icon={FaUserEdit}>
                   <div className="px-4">Profile</div>
                 </Dropdown.Item>
               </Link>
-              <Dropdown.Item
-                href="/login"
-                onClick={() =>
-                  dispatch({
-                    type: Types.logout,
-                    payload: null,
-                  })
-                }
-              >
-                <div className="px-4">Logout</div>
-              </Dropdown.Item>
+              <Link to="/login">
+                <Dropdown.Item
+                  icon={FaSignOutAlt}
+                  onClick={() =>
+                    dispatch({
+                      type: Types.logout,
+                      payload: null,
+                    })
+                  }
+                >
+                  <div className="px-4">Logout</div>
+                </Dropdown.Item>
+              </Link>
             </Dropdown>
           </div>
         </Navbar>
@@ -267,7 +269,7 @@ export const InstructorLayout = () => {
                 bordered
                 img={instructor?.photoURL}
                 placeholderInitials={instructor.userId?.email
-                  ?.slice(0, 2)
+                  .charAt(0)
                   .toUpperCase()}
                 status="online"
               />

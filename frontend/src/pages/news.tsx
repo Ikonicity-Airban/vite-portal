@@ -22,22 +22,29 @@ function NewsPage() {
     events: IEvent[];
   }>("events", fetchEvent);
 
-  if (isLoading) return <Spinner />;
-
+  if (isLoading) return;
   return (
     <section className="my-6 max-w-screen-desktop mx-auto">
       <BreadcrumbComponents />
+
+    {isLoading ? <div className="h-full grid place-items-center">
+    <Spinner />
+
+    </div> : 
+    <>
       <Section
-        title="Latest News and events"
-        subtitle="Recent happenings in the department"
+      title="Latest News and events"
+      subtitle="Recent happenings in the department"
       >
         <NewsSection
           news={data?.events?.filter((item) => item.type == "news")}
-        />
+          />
       </Section>
       <EventList
-        events={data?.events?.filter((item) => item.type == "event")}
+      events={data?.events?.filter((item) => item.type == "event")}
       />
+    </>
+    }
     </section>
   );
 }

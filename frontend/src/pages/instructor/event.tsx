@@ -59,7 +59,6 @@ function EventPage() {
     events: IEvent[];
   }>("events", fetchEvent);
 
-  console.log("🚀 ~ file: event.tsx:48 ~ EventPage ~ data:", data);
   const createMutation = useMutation("events", createEvent, {
     onSuccess: () => {
       dispatch({
@@ -92,7 +91,6 @@ function EventPage() {
   });
 
   const onSubmit = (data) => {
-    console.log("🚀 ~ file: event.tsx:84 ~ onSubmit ~ data:", data);
     if (data._id) {
       updateMutation.mutate({
         ...data,
@@ -174,11 +172,8 @@ function EventPage() {
       ),
     },
   ];
+
   function handleTableEdit(editInfo) {
-    console.log(
-      "🚀 ~ file: event.tsx:151 ~ handleTableEdit ~ editInfo:",
-      editInfo
-    );
     updateMutation.mutate({
       ...editInfo?.data,
       [editInfo.columnId]: editInfo.value,
@@ -241,6 +236,7 @@ function EventPage() {
       </div>
     </form>
   );
+
   return (
     <main className="my-10">
       <EventList events={data?.events} />

@@ -13,7 +13,7 @@ import { toast } from "react-hot-toast";
 import useAxiosPrivate from "../../api/hooks/useAxiosPrivate";
 import { useForm } from "react-hook-form";
 
-export function StudentsPage() {
+export default function StudentsPage() {
   const http = useAxiosPrivate();
   const { handleSubmit, register, reset } = useForm<IStudent>();
   const { dispatch } = useContext(AppContext);
@@ -150,7 +150,7 @@ export function StudentsPage() {
     >
       <div className="space-y-3">
         <Label value="First Name" htmlFor="firstName" />
-        <TextInput required {...register("firstName")} id="firstName"/>
+        <TextInput required {...register("firstName")} id="firstName" />
       </div>
       <div className="space-y-3">
         <Label value="Last Name" htmlFor="lastName" />
@@ -232,8 +232,4 @@ export function StudentsPage() {
       </ListGroup>
     </main>
   );
-}
-
-export function InstructorsPage() {
-  return <div>InstructorsPage</div>;
 }

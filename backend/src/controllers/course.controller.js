@@ -112,11 +112,6 @@ async function UpdateOneCourse(req, res) {
     }
   );
   instructor.save();
-  console.log(
-    "🚀 ~ file: course.controller.js:92 ~ UpdateOneCourse ~ instructor:",
-    instructor
-  );
-
   res.status(StatusCodes.OK).json(course);
 }
 

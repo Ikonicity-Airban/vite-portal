@@ -1,5 +1,7 @@
 import { IInstructor, ILoginResponse, IModal, IStudent } from "./@types";
 
+import Settings from "./settings";
+
 type ActionMap<M extends { [index: string]: unknown }> = {
   [Key in keyof M]: M[Key] extends undefined
     ? {
@@ -47,7 +49,7 @@ export const defaultInstructor: IInstructor = {
   firstName: "John",
   lastName: "Doe",
   assignment: [],
-  department: "Computer Science",
+  department: Settings.DEPT.name,
 };
 
 export const authReducer = <S>(

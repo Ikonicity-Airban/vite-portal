@@ -6,7 +6,7 @@ interface IHeadingProps {
 function Heading({ heading, section_title }: IHeadingProps) {
   return (
     <div className="text-center font-bold my-6 space-y-2" aria-label="Explore">
-      <h3 className="font-robo uppercase text-[var(--primary)]">
+      <h3 className="font-robo uppercase text-[var(--primary)] font-normal">
         {section_title}
       </h3>
       {heading && (

@@ -4,6 +4,7 @@ import { IAssignment } from "../../api/@types";
 import ReactDataGrid from "@inovua/reactdatagrid-community";
 import Section from "../../components/Section";
 import { assignmentColumns } from "../../api/resource/columns";
+import { truncateString } from "../../api/utils/truncateString";
 import useAxiosPrivate from "../../api/hooks/useAxiosPrivate";
 import { useQuery } from "react-query";
 
@@ -24,11 +25,6 @@ function AssignmentPage() {
       return response.data;
     }
   );
-  console.log(
-    "🚀 ~ file: assignment.tsx:14 ~ AssignmentPage ~ assignment:",
-    assignment
-  );
-
   return (
     <main className="my-10">
       <ListGroup>
@@ -36,15 +32,25 @@ function AssignmentPage() {
           <Section subtitle="New Assignments">
             <div className="overflow-auto z-10">
               {/* add new course */}
-              <div className="grid mobile:grid-cols-2 tablet:grid-cols-3">
-                {assignment?.assignments.map((ass: IAssignment) => (
-                  <Card>
-                    <h3>{ass.title}</h3>
-                    <h4>{ass.description}</h4>
-                    <h4>{ass.description}</h4>
-                  </Card>
-                ))}
-              </div>
+              {assignment?.count ? (
+                <div className="grid mobile:grid-cols-2 tablet:grid-cols-3 gap-6">
+                  {assignment?.assignments
+                    .slice(0, 3)
+                    .map((ass: IAssignment) => (
+                      <Card className="text-left">
+                        <h3 className="font-semibold mb-4 logo-clipped">
+                          {ass.title}
+                        </h3>
+                        <p>{truncateString(ass.description, 50)}</p>
+                        <p className="text-xs text-right text-gray-400">
+                          {new Date(ass.createdAt || "").toUTCString()}
+                        </p>
+                      </Card>
+                    ))}
+                </div>
+              ) : (
+                <Card className="mx-auto">No Assignment</Card>
+              )}
             </div>
             {/* all courses semester by semester list add and delete */}
           </Section>

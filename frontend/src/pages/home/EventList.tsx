@@ -1,6 +1,7 @@
 import { Card } from "flowbite-react";
 import { IEvent } from "../../api/@types";
 import Section from "../../components/Section";
+import { truncateString } from "../../api/utils/truncateString";
 
 type Props = {
   events?: IEvent[];
@@ -18,7 +19,9 @@ function EventList({ events }: Props) {
               <p className="text-xs text-gray-400">
                 {new Date(event.date || "").toDateString()}
               </p>
-              <p className="">{event.content.slice(0, 150)}</p>
+              <p className="flex-1 text-base">
+                {truncateString(event.content, 100)}
+              </p>
             </Card>
           ))}
         </div>

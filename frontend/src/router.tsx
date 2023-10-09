@@ -3,12 +3,11 @@ import {
   InstructorLayout,
   StudentLayout,
 } from "./layouts/DashboardLayout";
-import { InstructorsPage, StudentsPage } from "./pages/admin/users";
 import { LoginLayout, SignUpLayout } from "./layouts/AuthLayout";
 
 import AboutPage from "./about";
 import AdminAssignmentPage from "./pages/admin/assignment";
-import AdminDashboard from "./pages/admin/dashboard";
+import AdminDashboard from "./pages/admin/Dashboard";
 import AdminEventPage from "./pages/admin/event";
 import App from "./App";
 import AssignmentPage from "./pages/student/assignment";
@@ -20,6 +19,7 @@ import { HomePage } from "./components";
 import InstructorAssignmentPage from "./pages/instructor/assignment";
 import InstructorDashboard from "./pages/instructor/Dashboard";
 import InstructorProfilePage from "./pages/instructor/profile";
+import InstructorsPage from "./pages/admin/instructors";
 import MainLayout from "./layouts/MainLayout";
 import NewsPage from "./pages/news";
 import ResultPage from "./pages/student/result";
@@ -28,6 +28,7 @@ import StaffPage from "./pages/staff";
 import StudentCoursesPage from "./pages/student/courses";
 import StudentDashboard from "./pages/student/Dashboard";
 import StudentProfilePage from "./pages/student/profile";
+import StudentsPage from "./pages/admin/students";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([
@@ -102,6 +103,10 @@ const router = createBrowserRouter([
           },
           {
             path: "assignment",
+            element: <AssignmentPage />,
+          },
+          {
+            path: "submission",
             element: <AssignmentPage />,
           },
           {

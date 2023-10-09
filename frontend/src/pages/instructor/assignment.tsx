@@ -2,6 +2,7 @@ import {
   Button,
   Label,
   ListGroup,
+  Modal,
   Select,
   TextInput,
   Textarea,
@@ -35,6 +36,12 @@ function InstructorAssignmentPage() {
   const { dispatch } = useContext(AppContext);
   const [instructor] = useLocalStorage("instructor", defaultInstructor);
   const [file, setFile] = useState<string>("");
+  const [isModalOpen, setModal] = useState(false);
+  const [mode, setMode] = useState<"Edit" | "Create">("Create");
+
+  const closeModal = () => setModal(false);
+  const showModal = () => setModal(true);
+
   useEffect(() => {
     reset();
   }, [dispatch, reset]);
@@ -68,12 +75,10 @@ function InstructorAssignmentPage() {
     count: number;
     assignments: IAssignment[];
   }>("assignments", fetchAssignment);
+
   const createMutation = useMutation("assignments", createAssignment, {
     onSuccess: () => {
-      dispatch({
-        type: Types.close,
-        payload: null,
-      });
+      closeModal();
       reset();
       toast.success("Created successfully");
       refetch();
@@ -82,10 +87,7 @@ function InstructorAssignmentPage() {
 
   const updateMutation = useMutation("assignments", updateAssignment, {
     onSuccess: () => {
-      dispatch({
-        type: Types.close,
-        payload: null,
-      });
+      closeModal();
       reset();
       toast.success("Updated successfully");
       refetch();
@@ -100,8 +102,6 @@ function InstructorAssignmentPage() {
   });
 
   const onSubmit = (data) => {
-    console.log(file, data);
-
     const assignment = {
       ...data,
       file,
@@ -118,27 +118,16 @@ function InstructorAssignmentPage() {
   };
 
   const handleEdit = (course: IAssignment) => {
+    setMode("Edit");
     reset(course);
-    dispatch({
-      type: Types.open,
-      payload: {
-        header: "Update an assignment",
-        buttonOK: "Submit",
-        content: <RegisterForm />,
-      },
-    });
+    setFile(course.file);
+    showModal();
   };
 
   const handleCreate = () => {
+    setMode("Create");
     reset();
-    dispatch({
-      type: Types.open,
-      payload: {
-        header: "Create an assignment",
-        buttonOK: "Submit",
-        content: <RegisterForm />,
-      },
-    });
+    showModal();
   };
 
   const handleDelete = (id: string) => {
@@ -216,6 +205,7 @@ function InstructorAssignmentPage() {
     },
   ];
 
+  //click and edit functionality
   function handleTableEdit(editInfo) {
     delete editInfo.data.file;
     updateMutation.mutate({
@@ -224,6 +214,7 @@ function InstructorAssignmentPage() {
     });
   }
 
+  // the registration form
   const RegisterForm = () => (
     <form action="" className="w-full " onSubmit={handleSubmit(onSubmit)}>
       <div className="flex flex-wrap gap-4 mx-auto w-full items-center">
@@ -249,7 +240,7 @@ function InstructorAssignmentPage() {
           </div>
           <Textarea
             required
-            className="placeholder:capitalize placeholder:mx-10 h-28"
+            className="placeholder:capitalize placeholder:mx-10 h-28 px-4"
             id="ass_title"
             // placeholder={label}
             {...register("description")}
@@ -299,13 +290,29 @@ function InstructorAssignmentPage() {
           isProcessing={createMutation.isLoading || updateMutation.isLoading}
           gradientDuoTone="greenToBlue"
         >
-          Upload Assignment
+          {mode} Assignment
         </Button>
       </div>
     </form>
   );
+
   return (
     <main className="my-10">
+      <Modal size="xl" show={isModalOpen} dismissible onClose={closeModal}>
+        <Modal.Header className="text-sm">{mode} Assignment</Modal.Header>
+        <Modal.Body>
+          <div className="flex p-4 items-center gap-6">
+            <span className="text-sm flex-1">
+              <RegisterForm />
+            </span>
+          </div>
+        </Modal.Body>
+        <Modal.Footer className="justify-end">
+          <Button size="sm" color="gray" onClick={closeModal}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
       <ListGroup>
         <Section subtitle="All assignments">
           <Button onClick={handleCreate} gradientDuoTone="greenToBlue">

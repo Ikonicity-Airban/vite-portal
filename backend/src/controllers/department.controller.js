@@ -5,29 +5,6 @@ const Student = require("../models/student.model");
 const Instructor = require("../models/instructor.model");
 
 //Creates only one department
-async function CreateDepartment(req, res) {
-  const { name, headOfDepartment, description } = req.body;
-
-  if (!name || !headOfDepartment || !description) {
-    throw new BadRequestError("invalid fields");
-  }
-
-  const departmentCount = (await Department.find({})).length;
-
-  if (departmentCount > 0)
-    throw new BadRequestError(
-      "Department Already Exist Delete it first or update it"
-    );
-  const department = await Department.create({
-    name,
-    headOfDepartment,
-    description,
-  });
-
-  res.status(StatusCodes.CREATED).json({ department });
-}
-
-//Get the one Department info
 async function GetDepartmentInfo(req, res) {
   const department = await Department.findOne({})
     .populate("instructors", "-__v -createdAt -updatedAt")
@@ -74,7 +51,6 @@ async function DeleteDepartmentInfo(req, res) {
 }
 
 module.exports = {
-  CreateDepartment,
   GetDepartmentInfo,
   DeleteDepartmentInfo,
   UpdateDepartmentInfo,

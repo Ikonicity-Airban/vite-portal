@@ -27,7 +27,7 @@ function StaffPage() {
       <Section title="Staff Collection" subtitle="Our Amazing Staff">
         {data?.count ? (
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {data.instructors.map((ins, index) => (
+            {data?.instructors.map((ins, index) => (
               <Card
                 key={index}
                 imgSrc={ins.photoURL || ""}

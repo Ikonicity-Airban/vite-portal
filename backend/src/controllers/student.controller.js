@@ -22,8 +22,6 @@ async function GetOneStudentStats(req, res) {
 
   const student = await Student.findOne({ userId })
     .populate("coursesOffered userId")
-
-    // .populate("department")
     .lean();
   if (!student) throw new NotFoundError("Student Not found");
   res.status(StatusCodes.OK).json(student);

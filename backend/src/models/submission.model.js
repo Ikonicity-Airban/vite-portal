@@ -1,11 +1,24 @@
-import { model, Schema } from "mongoose";
+const { Schema, model } = require("mongoose");
 
-const submissionSchema = new Schema({
-    instructor: {type: Schema.Types.ObjectId, ref: "Instructor"}
-    student: { type: Schema.Types.ObjectId, ref: 'Student' },
-    assignment: { type: Schema.Types.ObjectId, ref: 'Assignment' },
-    linkOrFile: { data: Buffer, contentType: String }
-}, { timestamps: true });
+const submissionSchema = new Schema(
+  {
+    student: {
+      type: Schema.Types.ObjectId,
+      ref: "Student",
+      required: true,
+      unique: true,
+    },
+    assignment: {
+      type: Schema.Types.ObjectId,
+      ref: "Assignment",
+      required: true,
+    },
+    linkOrFile: { type: String, required: true },
+    dateOfSubmission: { type: Date },
+  },
+  { timestamps: true }
+);
 
-const Submission = model('Submission', submissionSchema)
-export default Submission
+const Submission = model("Submission", submissionSchema);
+
+module.exports = Submission;

@@ -10,7 +10,11 @@ const UserSchema = new Schema(
       required: true,
       min: [3, "Password length too short"],
     },
-
+    department: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: "Department",
+    },
     blacklisted: {
       type: Boolean,
       enum: [true, false],

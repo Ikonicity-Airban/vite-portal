@@ -14,6 +14,8 @@ const {
   UnauthenticatedError,
   NotFoundError,
 } = require("../error");
+const Department = require("../models/department.model");
+const { default: Settings } = require("../settings");
 ///////////////////////////////////////
 //?log in
 async function Login(req, res) {
@@ -57,26 +59,34 @@ async function CreateAccount(req, res) {
   //creates the user
   const user = new User({ email, password });
 
-  //create the kind of user expected
+  //creates a department on first account and make an Admin
+
   let createdUser;
-  if (basePath === "student") {
-    user.role = "student";
-    createdUser = await Student.create({ userId: user._id, ...req.body });
-    createdUser.level = 100;
-  } else if (basePath === "instructor") {
-    user.role = "instructor";
-    createdUser = await Instructor.create({ userId: user._id, ...req.body });
+  if (User.countDocuments == 1) {
+    const department = Department.create({ ...Settings.DEPT });
+    user.department = department._id;
+    user.role = "admin";
   }
+
+  //create the kind of user expected
+  else {
+    if (basePath === "student") {
+      user.role = "student";
+      createdUser = await Student.create({ userId: user._id, ...req.body });
+      createdUser.level = 100;
+    } else if (basePath === "instructor") {
+      user.role = "instructor";
+      createdUser = await Instructor.create({ userId: user._id, ...req.body });
+    }
+  }
+
   user.save();
   createdUser.populate("userId", "email role ");
-  //Token services
-
   //successful response
   res.status(200).json({ user: createdUser });
 }
 
-//is authenticated
-
+//
 function Logout(req, res, next) {
   res.locals.user = null;
   res.sendStatus(StatusCodes.OK);

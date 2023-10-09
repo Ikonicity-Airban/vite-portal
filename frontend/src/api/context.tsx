@@ -6,7 +6,6 @@ const initialState = {
     _id: "",
     email: "",
     role: "",
-    department: {},
     accessToken: "",
   },
   signUpInfo: {},
@@ -18,6 +17,7 @@ const initialState = {
     buttonOK: "OK",
     type: "Success",
   },
+  file: "",
 };
 
 type initialStateType = typeof initialState;

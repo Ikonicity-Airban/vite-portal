@@ -10,13 +10,15 @@ const NewsSection = ({ news }: Props) => {
       {news &&
         news.map((item) => (
           <Card key={item._id}>
-            <h3 className="text-lg font-bold mb-2 logo-clipped">
-              {item.title}
-            </h3>
-            <p className="text-xs text-gray-400">
-              {new Date(item.date || "").toDateString()}
-            </p>
-            <p className="">{item.content}</p>
+            <div className="flex flex-col ">
+              <h3 className="text-lg font-bold mb-2 logo-clipped">
+                {item.title}
+              </h3>
+              <p className="text-xs text-gray-400">
+                {new Date(item.date || "").toDateString()}
+              </p>
+              <p className="flex-1">{item.content}</p>
+            </div>
           </Card>
         ))}
     </div>

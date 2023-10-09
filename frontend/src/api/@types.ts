@@ -60,7 +60,8 @@ export type IAssignment = {
   instructor: string;
   level: 100 | 200 | 300 | 400;
   description: string;
-  submission: string;
+  submissions: ISubmission[];
+  endDate?: string;
   course: ICourse;
 } & dataResponse;
 
@@ -78,12 +79,8 @@ export type IInstructor = {
 export type ISubmission = {
   student: string;
   assignment: string;
-  linkOrFile?:
-    | {
-        data: Buffer;
-        contentType: string;
-      }
-    | string;
+  linkOrFile?: string;
+  dateOfSubmission: Date | string;
 } & dataResponse;
 
 export type CustomError = {

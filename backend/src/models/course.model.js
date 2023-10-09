@@ -1,5 +1,4 @@
 const { Schema, model } = require("mongoose");
-const Department = require("./department.model");
 
 const CourseSchema = new Schema(
   {
@@ -16,6 +15,11 @@ const CourseSchema = new Schema(
     },
 
     description: { type: String },
+
+    department: {
+      type: Schema.Types.ObjectId,
+      ref: "Department",
+    },
 
     instructor: {
       type: Schema.Types.ObjectId,
@@ -41,7 +45,6 @@ CourseSchema.virtual("students", {
   foreignField: "coursesOffered",
 });
 
-CourseSchema.pre;
 const Course = model("Course", CourseSchema);
 
 module.exports = Course;

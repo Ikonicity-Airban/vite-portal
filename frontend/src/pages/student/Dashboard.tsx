@@ -1,11 +1,10 @@
 import { Card, ListGroup, Progress } from "flowbite-react";
 
+import AssignmentsList from "../../components/AssignmentsList";
 import { AxiosResponse } from "axios";
 import { Helmet } from "react-helmet";
 import { IStudent } from "../../api/@types";
-import ReactDataGrid from "@inovua/reactdatagrid-community";
 import Section from "../../components/Section";
-import { assignmentColumns } from "../../api/resource/columns";
 import { getCourse } from "../../api/resource/course";
 import useAxiosPrivate from "../../api/hooks/useAxiosPrivate";
 import { useMemo } from "react";
@@ -21,7 +20,6 @@ function StudentDashboard() {
     cacheTime: 3600000,
     refetchInterval: 3600000,
   });
-  console.log("🚀 ~ file: Dashboard.tsx:24 ~ StudentDashboard ~ data:", data);
 
   const { data: assignment } = useQuery(
     "assignments",
@@ -31,7 +29,7 @@ function StudentDashboard() {
       refetchInterval: 3600000,
     }
   );
-  const { data: userInfo, isLoading } = useQuery<AxiosResponse<IStudent>>(
+  const { data: userInfo } = useQuery<AxiosResponse<IStudent>>(
     "student",
     async () => await http.get("/students/my-profile")
   );
@@ -126,14 +124,8 @@ function StudentDashboard() {
         </ListGroup.Item>
         <Section title="Assignments">
           <div className="overflow-auto w-full">
-            <ReactDataGrid
-              emptyText="No assignment for now 🚀"
-              style={{
-                minWidth: "100%",
-              }}
-              loading={isLoading}
-              columns={assignmentColumns}
-              dataSource={assignment?.data || []}
+            <AssignmentsList
+              assignments={assignment?.data.assignments.slice(0, 3)}
             />
           </div>
         </Section>
