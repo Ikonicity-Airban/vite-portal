@@ -68,16 +68,13 @@ export default function HomeComponent() {
         <Section subtitle="What We Offer?">
           <p className="text-base leading-loose">
             We offer a range of programs and courses that are designed to meet
-            the needs of students at all levels, from undergraduate to graduate
-            and beyond. On our website, you'll find information about our
-            faculty members, their research interests, and their contact
-            information. You can also browse our course offerings, view our
-            academic calendar, and stay up-to-date with the latest news and
-            events happening in our department. Whether you're a current
-            student, a prospective student, or just interested in learning more
-            about our department, we invite you to explore our website and
-            discover all that we have to offer. Thank you for visiting and we
-            look forward to hearing from you soon!
+            the needs of students at all levels, from ND1 to HND2 and beyond.
+            You can browse our course offerings, view our academic calendar, and
+            stay up-to-date with the latest news and events happening in our
+            department. Whether you're a current student, a prospective student,
+            or just interested in learning more about our department, we invite
+            you to explore our website www.NACEST.org and discover all that we
+            have to offer. Thank you for visiting computer science department
           </p>
           <ProgramsSection />
         </Section>
