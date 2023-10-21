@@ -29,6 +29,7 @@ const studentSideLinks = [
   { name: "Dashboard", link: "", icon: <FaDiceFour /> },
   { name: "Courses", link: "my-courses", icon: <FaBookOpen /> },
   { name: "Assignments", link: "assignment", icon: <FaBoxOpen /> },
+  { name: "Student Profile", link: "my-profile", icon: <FaUserEdit /> },
   // { name: "Submission", link: "submission", icon: <FaUpload /> },
 ];
 const instructorSideLinks = [
